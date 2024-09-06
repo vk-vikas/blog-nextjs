@@ -1,15 +1,19 @@
-import React from "react";
+import Link from "next/link";
 import Links from "./links/Links";
 import styles from "./Navbar.module.css";
-import Link from "next/link";
+import { auth } from "@/lib/auth";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const session = await auth();
+
   return (
     <div className={styles.container}>
       <Link href="/" className={styles.logo}>
         Logo
       </Link>
-      <Links />
+      <div>
+        <Links session={session} />
+      </div>
     </div>
   );
 };
